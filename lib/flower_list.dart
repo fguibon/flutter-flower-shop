@@ -46,7 +46,8 @@ class _FlowerListState extends State<FlowerList> {
                   ),
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.of(context).pushNamed(FlowerPage.tag);
+                      Navigator.of(context).pushNamed(FlowerPage.tag,
+                          arguments: [isEven ? "Daliah" : "Orchid"]);
                     },
                     child: Card(
                       color: Theme.of(context).primaryColor,
@@ -107,7 +108,8 @@ class _FlowerListState extends State<FlowerList> {
                     top: isEven ? 50 : 50,
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.of(context).pushNamed(FlowerPage.tag);
+                        Navigator.of(context).pushNamed(FlowerPage.tag,
+                            arguments: [isEven ? "Daliah" : "Orchid"]);
                       },
                       child: isEven ? daliahImage : orchidImage,
                     ))

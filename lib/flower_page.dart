@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'flower_list_mini.dart';
+import 'rating.dart';
 
 class FlowerPage extends StatefulWidget {
   static const tag = "flower_page";
@@ -17,9 +19,14 @@ class _FlowerPageState extends State<FlowerPage> {
     child: Image.asset("images/orchid.png"),
   );
 
+  int cart = 0;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    List<String> args =
+        ModalRoute.of(context)?.settings.arguments as List<String>;
+    String flowerName = args[0];
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -52,7 +59,7 @@ class _FlowerPageState extends State<FlowerPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Daliahs",
+                  flowerName,
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -60,7 +67,7 @@ class _FlowerPageState extends State<FlowerPage> {
                   ),
                 ),
                 Text(
-                  "Deliver me Daliah",
+                  "Deliver me " + flowerName,
                   style: TextStyle(
                     color: Colors.white54,
                     fontSize: 14,
@@ -71,7 +78,7 @@ class _FlowerPageState extends State<FlowerPage> {
                 ),
                 Row(
                   children: [
-                    daliahImage,
+                    flowerName == "Daliah" ? daliahImage : orchidImage,
                     Spacer(),
                     Column(
                       children: [
@@ -93,30 +100,7 @@ class _FlowerPageState extends State<FlowerPage> {
                         SizedBox(
                           height: 5,
                         ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.star,
-                              color: Colors.white,
-                            ),
-                            Icon(
-                              Icons.star,
-                              color: Colors.white,
-                            ),
-                            Icon(
-                              Icons.star,
-                              color: Colors.white,
-                            ),
-                            Icon(
-                              Icons.star,
-                              color: Colors.white,
-                            ),
-                            Icon(
-                              Icons.star_border_outlined,
-                              color: Colors.white,
-                            ),
-                          ],
-                        )
+                        Rating()
                       ],
                     ),
                   ],
@@ -140,7 +124,7 @@ class _FlowerPageState extends State<FlowerPage> {
             child: Container(
               width: size.width,
               color: Color.fromRGBO(240, 240, 240, 1),
-              height: size.height / 1.7,
+              height: size.height / 1.5,
               child: Column(
                 children: [
                   Padding(
@@ -170,9 +154,9 @@ class _FlowerPageState extends State<FlowerPage> {
                     ),
                   ),
                   Spacer(),
-                  // Flower row
+                  FlowerListMini(),
                   Container(
-                    padding: EdgeInsets.all(15),
+                    padding: EdgeInsets.all(10),
                     child: Row(
                       children: [
                         Container(
@@ -186,15 +170,17 @@ class _FlowerPageState extends State<FlowerPage> {
                             children: [
                               IconButton(
                                 onPressed: () {
-                                  // TODO remove
+                                  setState(() {
+                                    cart--;
+                                  });
                                 },
                                 icon: Icon(Icons.remove_circle),
                                 color: Theme.of(context).secondaryHeaderColor,
                               ),
-                              Text("4"),
+                              Text(cart.toString()),
                               IconButton(
                                 onPressed: () {
-                                  // TODO add
+                                  cart++;
                                 },
                                 icon: Icon(Icons.add_circle),
                                 color: Theme.of(context).secondaryHeaderColor,
@@ -210,7 +196,8 @@ class _FlowerPageState extends State<FlowerPage> {
                             ),
                             child: MaterialButton(
                               color: Colors.amberAccent,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45)),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(45)),
                               onPressed: () {
                                 // TODO
                               },
