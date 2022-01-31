@@ -20,7 +20,7 @@ class _HeaderState extends State<Header> {
                     padding: EdgeInsets.symmetric(horizontal: 15),
                     height: size.height / 5,
                     decoration: BoxDecoration(
-                        color: Colors.greenAccent,
+                        color: Colors.purple.shade400,
                         borderRadius: BorderRadius.vertical(
                           bottom: Radius.circular(45),
                         ),
@@ -86,8 +86,32 @@ class _HeaderState extends State<Header> {
                       ],
                     ),
                   ),
+                  SizedBox(
+                    height: 20,
+                  ),
                 ],
               ),
+              Positioned(
+                bottom: 0,
+                child: Container(
+                    height: 50,
+                    width: size.width,
+                    child: Card(
+                      elevation: 3,
+                      margin: EdgeInsets.symmetric(horizontal: 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          label: Text("Ma recherche"),
+                          suffixIcon: Icon(Icons.search),
+                          contentPadding: EdgeInsets.only(left: 20),
+                        ),
+                      ),
+                    )),
+              )
             ],
           ),
         ],
