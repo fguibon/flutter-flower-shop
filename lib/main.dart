@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'flower_page.dart';
 import 'header.dart';
 import 'categories.dart';
@@ -11,6 +12,11 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+      ),
+    );
     return MaterialApp(
       home: ShopHome(),
       routes: {
@@ -18,6 +24,7 @@ class MyApp extends StatelessWidget {
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        brightness: Brightness.light,
         primaryColor: Colors.purple.shade400,
         canvasColor: Colors.purple.shade100,
         appBarTheme:
@@ -27,6 +34,18 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.amber.shade600,
         ),
         cardColor: Theme.of(context).primaryColor,
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: Colors.purple.shade400,
+        canvasColor: Colors.purple.shade100,
+        appBarTheme:
+            AppBarTheme(color: Colors.purple.shade400, centerTitle: true),
+        bottomAppBarColor: Colors.purple.shade400,
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: Colors.amber.shade600,
+        ),
+        cardColor: Color.fromRGBO(20, 20, 20, 1),
       ),
     );
   }
@@ -38,11 +57,12 @@ class ShopHome extends StatefulWidget {
 }
 
 class _ShopHomeState extends State<ShopHome> {
-
+  
   @override
   Widget build(BuildContext context) {
+    bool light = Theme.of(context).brightness == Brightness.light;
     return Scaffold(
-      backgroundColor: Color.fromRGBO(240, 240, 240, 1),
+      backgroundColor: light ? Color.fromRGBO(240, 240, 240, 1) : Color.fromRGBO(35, 35, 35, 1),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(

@@ -10,6 +10,7 @@ class _CategoriesState extends State<Categories> {
   @override
   Widget build(BuildContext context) {
     int items = 10;
+    bool light = Theme.of(context).brightness == Brightness.light;
     return SliverToBoxAdapter(
       child: Container(
         height: 100,

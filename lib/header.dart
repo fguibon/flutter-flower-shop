@@ -9,6 +9,7 @@ class _HeaderState extends State<Header> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    bool light = Theme.of(context).brightness == Brightness.light;
     return SliverList(
       delegate: SliverChildListDelegate(
         [
@@ -97,7 +98,7 @@ class _HeaderState extends State<Header> {
                     height: 50,
                     width: size.width,
                     child: Card(
-                      color: Colors.white,
+                      color: light ? Colors.white : Theme.of(context).cardColor,
                       elevation: 3,
                       margin: EdgeInsets.symmetric(horizontal: 50),
                       shape: RoundedRectangleBorder(
@@ -107,7 +108,10 @@ class _HeaderState extends State<Header> {
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           label: Text("Ma recherche"),
-                          suffixIcon: Icon(Icons.search),
+                          suffixIcon: Icon(
+                            Icons.search,
+                            color: light ? Colors.black54 : Colors.white60,
+                          ),
                           contentPadding: EdgeInsets.only(left: 20),
                         ),
                       ),
