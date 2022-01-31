@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'flower_page.dart';
 import 'header.dart';
 import 'categories.dart';
+import 'flower_list.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,13 +13,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: ShopHome(),
+      routes: {
+        FlowerPage.tag: (_) => FlowerPage(),
+      },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        primaryColor: Colors.purple.shade400,
+        canvasColor: Colors.purple.shade100,
         appBarTheme:
             AppBarTheme(color: Colors.purple.shade400, centerTitle: true),
         bottomAppBarColor: Colors.purple.shade400,
         floatingActionButtonTheme: FloatingActionButtonThemeData(
-            backgroundColor: Colors.amber.shade600),
+          backgroundColor: Colors.amber.shade600,
+        ),
+        cardColor: Theme.of(context).primaryColor,
       ),
     );
   }
@@ -32,6 +41,7 @@ class _ShopHomeState extends State<ShopHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(240, 240, 240, 1),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -51,13 +61,12 @@ class _ShopHomeState extends State<ShopHome> {
               ]),
           Header(),
           Categories(),
-          SliverList(
-              delegate: SliverChildListDelegate([
-            Text(
-              "Bouquet",
-              style: TextStyle(fontSize: 300),
-            )
-          ]))
+          FlowerList(
+            row: 1,
+          ),
+          FlowerList(
+            row: 2,
+          ),
         ],
       ),
       extendBody: true,
